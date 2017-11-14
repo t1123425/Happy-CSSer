@@ -1,0 +1,120 @@
+$width:200px;//外圍方形寬
+$height:200px;//外圍方形高
+$smWidth:70px;//內正方形寬
+$state:infinite;//動畫播放數
+$direct:both;//動畫方向狀態animation-fill-mode
+body{
+  width:100%;
+  height:800px;
+  background: #000;
+  color:#fff;
+  text-align: center;
+}
+p{
+  margin:20px 0;
+}
+.boxWrap{
+   width:$width;
+   height:$height;
+   position: relative;
+   margin:200px auto;
+  // background:$color;
+  transform: rotate(0deg) scale(1);
+  animation: rotating 5s $direct $state;
+  // animation-fill-mode: backwards;
+  animation-timing-function: linear;
+  
+ 
+ //triangle
+  .triangle{
+    position: absolute;
+    mix-blend-mode:difference;
+  }
+  .triangle:nth-child(1){
+    border-bottom:$width/2 solid #fff;
+    border-left:$width/2 solid transparent;
+    border-right:$width/2 solid transparent;
+    z-index: 1;
+    transform: rotate(-45deg) translate(0,0);
+    transform-origin: center bottom;
+    animation: separateLeft 5s $direct $state;
+  }
+  .triangle:nth-child(2){
+    border-bottom:$width/2 solid #fff;
+    border-left:$width/2 solid transparent;
+    border-right:$width/2 solid transparent;
+    z-index: 1;
+    transform-origin: center bottom;
+    transform: rotate(135deg) translate(0,0);
+    animation: separateRight 5s $direct $state;
+  }
+  .triangle:nth-child(3){
+    border-bottom: $smWidth solid #fff;
+    border-left: $smWidth solid transparent;
+    border-right: $smWidth solid transparent;
+    transform-origin: center bottom;
+    transform:rotate(270deg) translate(-$smWidth/2.3,$smWidth/2.3);
+     animation: smSeparateLeft 5s $direct $state;
+  }
+  .triangle:nth-child(4){
+    border-bottom: $smWidth solid #fff;
+    border-left: $smWidth solid transparent;
+    border-right: $smWidth solid transparent;
+    transform-origin: center bottom;
+    transform: rotate(90deg) translate($smWidth/2.3,-$smWidth/2.3);
+    animation: smSeparateRight 5s $direct $state;
+  }
+}
+
+@keyframes rotating{
+  100%{
+    transform: rotate(45deg) scale(0.7);
+    // transform:scale(0.7);
+  }
+}
+// triangle animate
+@keyframes separateLeft{
+  0%{
+    transform: rotate(-45deg) translate(0,0);
+    border-width:$width/2;
+  }
+  40%{
+    transform: rotate(-45deg) translate(0,0);
+    border-width:$width/2;
+  }
+  100%{
+    transform: rotate(0deg) translate($smWidth/2.5,-$smWidth/1.8);
+    border-width:$smWidth;
+  }
+}
+
+@keyframes separateRight{
+  0%{
+    transform: rotate(135deg) translate(0,0);
+    border-width:$width/2;
+  }
+  40%{
+    transform: rotate(135deg) translate(0,0);
+    border-width:$width/2;
+  }
+  100%{
+    transform: rotate(180deg) translate(-$smWidth/2.5,-$width/2);
+     border-width:$smWidth;
+  }
+}
+@keyframes smSeparateLeft{
+  90%{
+    transform:rotate(270deg) translate(-$smWidth/2.3,$smWidth/2.3);
+  }
+  100%{
+    transform:rotate(270deg) translate(-$smWidth/2.3,-$smWidth/2.3 - 10px);
+  }
+}
+@keyframes smSeparateRight{
+  90%{
+    transform: rotate(90deg) translate($smWidth/2.3,-$smWidth/2.3);
+  }
+  100%{
+    transform: rotate(90deg) translate($smWidth/2.3,-$smWidth - 25px);
+  }
+}
